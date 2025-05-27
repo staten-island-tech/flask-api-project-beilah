@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Artworks</title>
-</head>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Artwork</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
 <body>
     <h1>Artworks from the Art Institute of Chicago</h1>
-    <ul>
+   <div class="imgContainer">
         {% for artwork in artworks %}
-            <!--<li>{{ artwork.title }} by {{ artwork.artist_title }}</li>-->
-                <img src="https://www.artic.edu/iiif/2/{{artwork['image_id']}}/full/843,/0/default.jpg" alt="image" width="300">
+        <div>
+            <p class="title"> {{ artwork.title }}</p>
+            <img src="https://www.artic.edu/iiif/2/{{artwork['image_id']}}/full/843,/0/default.jpg" alt="image" width="300" class="img">
+        </div>
         {% endfor %}
-    </ul>
+   </div>
 </body> 
 </html>
