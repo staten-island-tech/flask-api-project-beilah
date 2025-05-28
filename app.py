@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     # Get artworks from the Art Institute of Chicago API
-    response = requests.get("https://api.artic.edu/api/v1/artworks")
+    response = requests.get("https://api.artic.edu/api/v1/artworks?fields=id,title,image_id,date_start,artist_display,date_display,main_reference_numb&page=1&limit=50")
     
     if response.status_code == 200:
         data = response.json()
