@@ -10,10 +10,14 @@
     <h1>Artworks from the Art Institute of Chicago</h1>
    <div class="imgContainer">
         {% for artwork in artworks %}
-        <div>
-            <p class="title"> {{ artwork.title }}</p>
-            <img src="https://www.artic.edu/iiif/2/{{artwork['image_id']}}/full/843,/0/default.jpg" alt="image" width="300" class="img">
-        </div>
+        <a href="{{ url_for('artworkDetail', id=artwork.id) }}" class="card-link">
+            <div class="card">
+                <p class="title"> {{ artwork.title }}</p>
+                <img src="https://www.artic.edu/iiif/2/{{artwork['image_id']}}/full/843,/0/default.jpg" alt="image" width="300" class="img">
+                <div class="card">
+                </div>
+            </div>
+        </a>
         {% endfor %}
    </div>
 </body> 
