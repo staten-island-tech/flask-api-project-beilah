@@ -5,10 +5,15 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ artwork.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h2 class="artworktitle">{{ artwork.title }}</h2>
-    <img src="https://www.artic.edu/iiif/2/{{ artwork.image_id }}/full/843,/0/default.jpg" alt="{{ artwork.title }}" width="400">
+    <h1 class="artwork-title">{{ artwork.title }}</h1>
+    <p class="artwork-artist"><strong>Artist:</strong> {{ artwork.artist_display }}</p>
+    <p class="artwork-date"><strong>Date:</strong> {{ artwork.date_display }}</p>
+    <p class="artwork-start"><strong>Start Date:</strong> {{ artwork.date_start }}</p>
+    <p class="desc"><strong>Description:</strong> {{ artwork.short_description }} </p>
+    <img class="imgDetail" src="https://www.artic.edu/iiif/2/{{ artwork.image_id }}/full/843,/0/default.jpg" alt="{{ artwork.title }}" width="400">
     {% if artwork.image %}
         <img src="{{ artwork.image }}" alt="{{ artwork.title }}" />
     {% endif %}

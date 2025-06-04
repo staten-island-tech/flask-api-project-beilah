@@ -3,12 +3,12 @@ import requests
 
 app = Flask(__name__)
 
-# Route for the home page
 @app.route("/")
 def index():
-    # Get artworks from the Art Institute of Chicago API
-    response = requests.get("https://api.artic.edu/api/v1/artworks?fields=id,title,image_id,date_start,artist_display,date_display,main_reference_numb&page=1&limit=25")
-    
+    response = requests.get(
+        "https://api.artic.edu/api/v1/artworks?fields=id,title,image_id,date_start,artist_display,date_display,main_reference_numb&page=1&limit=25"
+    )
+
     if response.status_code == 200:
         data = response.json()
         artworks_list = data.get('data', [])
@@ -17,21 +17,18 @@ def index():
 
     return render_template("index.html", artworks=artworks_list)
 
-# route for atrwork detail page
 @app.route('/artwork/<int:id>')
 def artworkDetail(id):
-    response = requests.get(f"https://api.artic.edu/api/v1/artworks?fields=id,title,image_id,date_start,artist_display,date_display,main_reference_numb&page=1&limit=25/{id}")
+    # FIXED API URL
+    response = requests.get(
+        f"https://api.artic.edu/api/v1/artworks/{id}?fields=id,title,image_id,date_start,short_description,artist_display,date_display,main_reference_numb"
+    )
 
     if response.status_code == 200:
-        data = response.json()
-        artworkData = data.get("data", {})
-        imgId = artworkData.get("image_id")
-        url = f"https://www.artic.edu/iiif/2/{imgId}/full/843,/0/default.jpg" if imgId else None
+        artwork = response.json().get('data', {})
+        return render_template('artworks.html', artwork=artwork)
     else:
-        artworkData = {}
-        url = None
+        return "Artwork not found", 404
 
-    return render_template("artworks.html", artwork=artworkData, image_url=url)
-    
 if __name__ == "__main__":
     app.run(debug=True)

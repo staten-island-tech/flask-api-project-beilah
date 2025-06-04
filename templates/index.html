@@ -12,7 +12,7 @@
         {% for artwork in artworks %}
         <a href="{{ url_for('artworkDetail', id=artwork.id) }}" class="card-link">
             <div class="card">
-                <p class="title"> {{ artwork.title }}</p>
+                <p class="artwork-title"> {{ artwork.title }}</p>
                 <img src="https://www.artic.edu/iiif/2/{{artwork['image_id']}}/full/843,/0/default.jpg" alt="image" width="300" class="img">
                 <div class="card">
                 </div>
